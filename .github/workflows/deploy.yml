@@ -3,7 +3,7 @@ name: Automatic Website Deployment
 on:
   push:
     branches:
-   - main
+        - main
 
 jobs:
     deploy:
@@ -16,4 +16,4 @@ jobs:
      
        - name: Deploy Website
         run: |
-          sudo cp -r ./* /var/wwww/website1
+          sudo cp -r ./* /var/www/website1/
