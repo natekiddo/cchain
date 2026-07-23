@@ -1,3 +1,4 @@
+
 name: Automatic Website Deployment
 
 on:
@@ -17,3 +18,4 @@ jobs:
        - name: Deploy Website
         run: |
           sudo cp -r ./* /var/www/website1/
+
