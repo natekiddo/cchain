@@ -1,0 +1,19 @@
+name: Automatic Website Deployment
+
+on:
+  push:
+    branches:
+   - main
+
+jobs:
+    deploy:
+      runs-on: self-hosted
+      
+
+      steps:
+       - name: Checkout Repository
+         uses: actions/checkout@v4
+     
+       - name: Deploy Website
+        run: |
+          sudo cp -r ./* /var/wwww/website1
