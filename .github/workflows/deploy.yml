@@ -14,10 +14,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
           
-      - name: Check Runner User
-        run: |
-          whoami
-          sudo -n whoami
+       - name: Check Server Folder
+    run: |
+      whoami
+      pwd
+      ls /var/www
+      ls -la /var/www/website1 || echo "website1 does not exist"
 
       # Deploy website files to Apache Virtual Host directory
       - name: Deploy Website
