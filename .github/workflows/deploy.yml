@@ -17,13 +17,17 @@ jobs:
       - name: Check Runner User
         run: |
           whoami
-          sudo -n whoami
+          pwd
+          ls/var/www
+          ls -la /var/www/website1 ||echo "website1 does not exist"
 
       # Deploy website files to Apache Virtual Host directory
       - name: Deploy Website
         run: |
+          mkdir -p /var/www/website1
           sudo rm -rf /var/www/website1/*
           sudo cp -r ./* /var/www/website1/
+          sudo chown -R nathan:nathan /var/www/website1
 
       # Restart Apache to apply changes
       - name: Restart Apache
