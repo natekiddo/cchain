@@ -10,12 +10,55 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      # Download the latest code from GitHub
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # Deploy website files to Apache Virtual Host directory
       - name: Deploy Website
         run: |
-          sudo cp -r . /var/www/website1/name: Automatic Website Deployment
+          sudo rm -rf /var/www/website1/*
+          sudo cp -r ./* /var/www/website1/
+
+      # Restart Apache to apply changes
+      - name: Restart Apache
+        run: |
+          sudo systemctl restart apache2
+
+      # Verify Apache is running
+      - name: Verify Apache
+        run: |
+          sudo systemctl status apache2 --no-pagername: Automatic Website Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      # Step 1: Download the latest code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Deploy website files to Apache directory
+      - name: Deploy Website
+        run: |
+          sudo rm -rf /var/www/html/*
+          sudo cp -r ./* /var/www/html/
+
+      # Step 3: Restart Apache server
+      - name: Restart Apache
+        run: |
+          sudo systemctl restart apache2
+
+      # Step 4: Check Apache status
+      - name: Verify Apache
+        run: |
+          sudo systemctl status apache2 --no-pagername: Automatic Website Deployment
 
 on:
   push:
@@ -32,4 +75,5 @@ jobs:
 
       - name: Deploy Website
         run: |
-          sudo cp -r ./* /var/www/website1/
+          sudo cp -r . /var/www/website1/name: Automatic Website Deployment
+
