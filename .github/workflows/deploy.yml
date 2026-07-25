@@ -10,31 +10,33 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      # Download the latest code from GitHub
+
       - name: Checkout Repository
         uses: actions/checkout@v4
-          
-       - name: Check Server Folder
-    run: |
-      whoami
-      pwd
-      ls /var/www
-      ls -la /var/www/website1 || echo "website1 does not exist"
 
-      # Deploy website files to Apache Virtual Host directory
+      - name: Check Server Folder
+        run: |
+          echo "Current user:"
+          whoami
+
+          echo "Current location:"
+          pwd
+
+          echo "Checking /var/www:"
+          ls -la /var/www
+
+          echo "Checking website1:"
+          ls -la /var/www/website1 || echo "website1 does not exist"
+
       - name: Deploy Website
         run: |
           sudo rm -rf /var/www/website1/*
           sudo cp -r ./* /var/www/website1/
 
-      # Restart Apache to apply changes
       - name: Restart Apache
         run: |
           sudo systemctl restart apache2
 
-      # Verify Apache is running
       - name: Verify Apache
         run: |
           sudo systemctl status apache2 --no-pager
-
-
