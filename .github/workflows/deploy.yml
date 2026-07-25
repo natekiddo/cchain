@@ -14,20 +14,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Check Server Folder
-        run: |
-          echo "Current user:"
-          whoami
-
-          echo "Current location:"
-          pwd
-
-          echo "Checking /var/www:"
-          ls -la /var/www
-
-          echo "Checking website1:"
-          ls -la /var/www/website1 || echo "website1 does not exist"
-
       - name: Deploy Website
         run: |
           sudo rm -rf /var/www/website1/*
