@@ -13,6 +13,11 @@ jobs:
       # Download the latest code from GitHub
       - name: Checkout Repository
         uses: actions/checkout@v4
+          
+      - name: Check Runner User
+        run: |
+          whoami
+          sudo -n whoami
 
       # Deploy website files to Apache Virtual Host directory
       - name: Deploy Website
